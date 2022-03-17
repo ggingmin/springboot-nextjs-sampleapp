@@ -2,10 +2,13 @@ version: "3.9"
 services:
   mariadb:
     container_name: mariadb
-    image: mariadb:latest
+    image: mariadb:10
     ports:
       - 3306:3306
+    volumes:
+      - ./db/conf.d:/etc/mysql/conf.d
+      - ./db/data:/var/lib/mysql
+    env_file: .env
     environment:
-      MARIADB_ROOT_PASSWORD: root
-      MARIADB_DATABASE: testdb
+      TZ: Asia/Seoul
     restart: always
